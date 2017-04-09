@@ -1,238 +1,257 @@
-<script src="https://cdn.jsdelivr.net/clipboard.js/1.5.13/clipboard.min.js"></script>
-<link href='https://fonts.googleapis.com/css?family=Roboto:300,300i,500,700,500i,900'/>
-<style>
-body{margin:0;padding:0;font-family:Roboto,Arial,sans-serif}
-.shorten-box{font-size:100%;font-weight:500;color:#666!important;margin:0}
-#output{display:inline-block;}
-.shorten-text{display:inline-block;color:#141924;margin-right:5px;border:1px solid transparent;line-height:1;padding:5px 0;}
-#foo{display:inline-block;background:#f8f8f8;border:1px solid #d5d5d5;border-radius:3px;padding:5px 8px;margin:0;box-shadow: inset 0px 0px 1px rgba(0,0,0,.08);font-family:Consolas,Monaco,'Andale Mono',monospace;font-size:14px;white-space:initial;word-spacing:normal;word-break:normal;hyphens:none;color:#000;cursor:pointer;line-height:1;}
-.clear{clear:both}
-#output{position:relative}
-#output .btn {
-  -webkit-transition: opacity 0.3s ease-in-out;
-  -o-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0;
-  position: absolute;
-  right:0;
-  top: 0;
+<html >
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <title>CodePen -  URL shortner</title>
+  
+  
+  
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+
+      <style>
+      body {
+  max-width: 32em;
+  margin: 1em auto 0;
 }
 
-button.btn {
-  position: relative;
-  display: inline-block;
-  padding: 5px 5px 4px;
-  font-size: 13px;
-  font-weight: bold;
-  line-height: 20px;
-  color: #333;
-  white-space: nowrap;
-  vertical-align: middle;
-  cursor: pointer;
-  background-color: #eee;
-  background-image: linear-gradient(#fcfcfc, #eee);
-  border: 1px solid #d5d5d5;
-  border-radius:0 3px 3px 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-appearance: none;
+img { width: 30px; }
+
+
+
+
+body {
+  background-color: #0a68bb;
+  background-image: url('http://mojoimage.com/free-image-hosting-12/5335bg.jpg');
+  background-size : cover;
 }
 
-img.clippy {
-  position: relative;
-  vertical-align: middle;
-  padding: 0;
-  background: none;
-  border: none;
-  -moz-box-shadow: 0;
-  -webkit-box-shadow: 0;
-  box-shadow: 0;
+nav {
+  margin : 50px auto;
+  width  : 290px;
 }
 
-#output:hover .btn {
-  opacity: 1;
+menu {
+  border-radius : 3px;
 }
 
-.tooltipped {
-  position: relative
+menu:after , menu:before {
+  display : block;
+  content : ' ';
 }
 
-.tooltipped:after {
-  position: absolute;
-  z-index: 1000000;
-  display: none;
-  padding: 5px 8px;
-  font: normal normal 11px/1.5 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  text-shadow: none;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: break-word;
-  white-space: pre;
-  pointer-events: none;
-  content: attr(aria-label);
-  background: rgba(0,0,0, 0.8);
-  border-radius: 3px;
-  -webkit-font-smoothing: subpixel-antialiased
+menu:after {
+  clear : both;
 }
 
-.tooltipped:before {
-  position: absolute;
-  z-index: 1000001;
-  display: none;
-  width: 0;
-  height: 0;
-  color: rgba(0,0,0, 0.8);
-  pointer-events: none;
-  content: "";
-  border: 5px solid transparent
+li {
+  list-style-type : none;
+  background      : linear-gradient(rgba(220,220,255,0.4) 85%, rgba(255,255,255,0.5) 100%);
+
+  float   : left;
+  cursor  : pointer;
+  padding : 3px 10px;
+  border-top    : 2px solid rgba(200,200,255,0.5);
+  border-bottom : 2px solid rgba(50,50,50,0.4);
 }
 
-.tooltipped:hover:before,
-.tooltipped:hover:after,
-.tooltipped:active:before,
-.tooltipped:active:after,
-.tooltipped:focus:before,
-.tooltipped:focus:after {
-  display: inline-block;
-  text-decoration: none
+li:first-child {
+  border-radius : 5px 0 0 5px;
 }
 
-.tooltipped-w:after {
-  right: 100%;
-  bottom: 50%;
-  margin-right: 5px;
-  -webkit-transform: translateY(50%);
-  -ms-transform: translateY(50%);
-  transform: translateY(50%)
+li:last-child {
+  border-radius : 0 5px 5px 0;
 }
 
-.tooltipped-w:before {
-  top: 50%;
-  bottom: 50%;
-  left: -5px;
-  margin-top: -5px;
-  border-left-color: rgba(0,0,0, 0.8)
+a {
+  display : block;
+  padding : 10px 13px;
+  font-size : 26px;
+  text-decoration : none;
+  border-radius   : 5px;
+  position        : relative;
+  top   : 0;
+  color : #FFF;			
+  transition : all .4s;
 }
 
-.tooltipped-w:after {
-  right: 100%;
-  bottom: 50%;
-  margin-right: 5px;
-  -webkit-transform: translateY(50%);
-  -ms-transform: translateY(50%);
-  transform: translateY(50%)
+li:hover a {
+  top   : -20px;
+  color : #4eacff;
+  background-color: #fff;
+  box-shadow : 0 0 5px 0 rgba(255, 255, 255, 0.7);
+  transition : all .4s;
 }
-button.btn:focus,button.btn:active{outline:0}
-</style>
 
+li a:after {
+  display  : block;
+  content  : '';
+  position : absolute;
+  top  : 100%;
+  left : 42%;
+  border-style : solid;
+  border-color : transparent;
+  border-width : 5px 5px 0 5px;
+  transition   : all .4s;
+}
+
+li:hover a:after {
+  border-color : white transparent transparent transparent;
+  transition   : all .4s;
+}
+
+/*************************************/
+
+.menu2 {
+  width : 350px;
+}
+
+.menu2 a {
+  font-family : georgia;
+  font-size   : 14px;
+  font-style  : italic;
+  text-transform : capitalize;
+}
+
+.menu2 li {
+  border-right  : 1px solid rgba(200,200,255,0.5);
+  border-left   : 1px solid rgba(40,40,40,0.2); 
+}
+
+.selected {
+  top   : -20px;
+  color : #4eacff;
+  background-color: #fff;
+  box-shadow : 0 0 5px 0 rgba(255, 255, 255, 0.7);
+  transition : all .4s;
+}
+
+.selected:after {
+  border-color : white transparent transparent transparent;
+  transition   : all .4s;
+}
+
+a.fun {
+  display : none;
+}
+
+    </style>
+
+  
+  
+  
+  
+</head>
+
+<body translate="no" >
+
+  <center>
+<nav class="menu2">
+  <menu>
+    <li><a href="https://alidzapp.github.io/URL-Shortener.html/">home</a></li>
+    <li><a href="#">about</a></li>
+    <li><a href="#">contact</a></li>
+  </menu>
+</nav>
+
+
+
+
+<a class="fun" href="http://info.flagcounter.com/YXv0"><img src="http://s03.flagcounter.com/count/YXv0/bg_FFFFFF/txt_000000/border_CCCCCC/columns_8/maxflags_250/viewers_0/labels_1/pageviews_1/flags_1/" alt="Flag Counter" border="0"></a>
+  
+  
+  
+  
+<div ng-app="angularTypeahead">
+	<div class="container-fluid" ng-controller="TypeaheadCtrl">
+		<h2><img src="http://a5.mzstatic.com/us/r30/Purple2/v4/be/56/c3/be56c3df-3e03-5dd2-f533-37a1875252bb/icon128-2x.png">  URL shortner</h2>
+    
+    
+    
+		<div class="form-group">
+		  
+			<input name="states" ng-model="selected" class="form-control">
+      
+      
+      
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Lateral TweetSplitter -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-9935930967042478"
+     data-ad-slot="4766287949"
+     data-ad-format="auto"></ins>
 <script>
-var urls = getQueryVariable("url");
-var apis = getQueryVariable("api");
-function getQueryVariable(variable) {
-  var query = window.location.search.substring(1);
-  var vars = query.split("&");
-  for (var i=0;i<vars.length;i++) {
-      var pair = vars[i].split("=");
-      if(pair[0] == variable){return pair[1];}
-  }
-  return(false);
-}
+(adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-<div class='shorten-box'>
-<script>document.write('<input value="'+ urls +'" id="longurl" name="url" type="hidden"/> '); </script>
-<div class='shorten-text'>Share this with short URL:</div>
-<div id='output'></div>
-<div class='clear'></div>
-  </div>
+
+
+      
+      <label for="states">{{shortUrl}}</label>
+		</div>
+    <button class="btn btn-success" ng-click="shortner(selected)">Submit</button>
+	</div>
+
+</div>
+
+<center/>
+  
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js'></script>
+
+    <script>
+    // https://angular-ui.github.io/
+
+// setup app and pass ui.bootstrap as dep
+var myApp = angular.module("angularTypeahead", []);
+
+// define factory for data source
+myApp.factory('dataService', function($http) {
+
+  return {
+
+    urlShortner: function(url) {
+      var baseUrl = 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBWJ0LKD1zVXG82xwHBdus1WhQHwHVU0Mg';
+      var data = {
+        "longUrl": url
+      }
+      return $http.post(baseUrl, data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
+  }
+});
+
+// setup controller and pass data source
+myApp.controller("TypeaheadCtrl", function($scope, dataService,$timeout) {
+$scope.shortUrl="";
+  $scope.shortner = function(url) {
+dataService.urlShortner(url).success(function(data){
+  $timeout(function() {
+       $scope.shortUrl = data.id;
+      console.log($scope.shortUrl)
+    }, 10);
  
 
-<script>
-(function() { var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true; po.src = 'https://apis.google.com/js/client.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s); })();
-
-function makeShort() {
-    var longUrl = document.getElementById("longurl").value;
-    var request = gapi.client.urlshortener.url.insert({
-        'resource': {
-            'longUrl': longUrl
-        }
-    });
-    request.execute(function(response) {
-        if (response.id != null) {
-            str = "";
-            str += "<button class='btn' data-clipboard-snippet><img class='clippy' width='13' src='https://firebasestorage.googleapis.com/v0/b/kompijs.appspot.com/o/image%2Fclippy.svg?alt=media&token=ded490f4-41c8-4fb6-a52a-0f078167d21b' alt='Copy to clipboard'></button><div id='foo'>"+ response.id +"</div>";
-            document.getElementById("output").innerHTML = str;
-        } else {
-            alert("ERROR: creating short url \n" + response.error);
-        }
-    });
-}
-
-function load() {
-    gapi.client.setApiKey(apis);
-    gapi.client.load('urlshortener', 'v1', function() {
-        document.getElementById("output").innerHTML = makeShort();
-    });
-}
-window.onload = load;
-</script>
-    <script>
-  var clipboard = new Clipboard('.btn', {
-    target: function() {
-      return document.querySelector('div#foo');
-    }
-  });
-
-  clipboard.on('success', function(e) {
-    console.log(e);
-  });
-
-  clipboard.on('error', function(e) {
-    console.log(e);
-  });
-
-var snippets = document.querySelectorAll('div#foo');
-var clipboardSnippets = new Clipboard('[data-clipboard-snippet]', {
-  target: function(trigger) {
-    return trigger.nextElementSibling;
+}).error(function(err){
+  console.log(err)
+});
+    
   }
-});
-clipboardSnippets.on('success', function(e) {
-  e.clearSelection();
-  showTooltip(e.trigger, 'Copied!');
-});
-clipboardSnippets.on('error', function(e) {
-  showTooltip(e.trigger, fallbackMessage(e.action));
-});
 
-var btns = document.querySelectorAll('.btn');
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener('mouseleave', function(e) {
-    e.currentTarget.setAttribute('class', 'btn');
-    e.currentTarget.removeAttribute('aria-label');
-  });
-}
+});
+  </script>
 
-function showTooltip(elem, msg) {
-  elem.setAttribute('class', 'btn tooltipped tooltipped-w');
-  elem.setAttribute('aria-label', msg);
-}
+  
+  
 
-function fallbackMessage(action) {
-  var actionMsg = '';
-  var actionKey = (action === 'cut' ? 'X' : 'C');
-  if (/iPhone|iPad/i.test(navigator.userAgent)) {
-    actionMsg = 'No support :(';
-  } else if (/Mac/i.test(navigator.userAgent)) {
-    actionMsg = 'Press ?-' + actionKey + ' to ' + action;
-  } else {
-    actionMsg = 'Press Ctrl-' + actionKey + ' to ' + action;
-  }
-  return actionMsg;
-}
-    </script>
+</body>
+</html>
+
+
+
